@@ -1,0 +1,87 @@
+
+
+/* 🌊 Main section with animated teal-blue gradient */
+.main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #002f4b, #006d77, #00b4d8);
+  background-size: 300% 300%;
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 💳 Main container box */
+.container {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5em;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.6);
+}
+
+/* 🧭 Header section */
+.header {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5em;
+}
+
+/* 🧾 List items */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8em 1em;
+  border-radius: 12px;
+  margin: 8px 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* 🔘 Buttons */
+button {
+  width: 120px;
+  height: 42px;
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #48cae4, #0096c7);
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
