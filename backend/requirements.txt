@@ -4,3 +4,5 @@ django-cors-headers
 djangorestframework
 psycopg2
 Pillow
+cryptography
+django-cryptography

@@ -10,8 +10,6 @@ const LoginPage = () => {
   
 
 
-
-
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
@@ -27,9 +25,13 @@ const LoginPage = () => {
 
       if(response.data.success)
       {
+        console.log("Entered ")
         localStorage.setItem("token",response.data.username) // Create Token on Success
         navigate('/main');
-        
+      }
+
+      else{
+        console.log(response.data.message)
       }
 
     } catch (error) {

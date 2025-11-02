@@ -1,8 +1,9 @@
-from .serializer import TaskSerializer
+from .serializer import TaskSerializer,UserSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Tasks
 from .models import Users
+from django.contrib.auth.hashers import make_password,check_password
 
 # Create your views here.
 
@@ -65,15 +66,50 @@ def post_data(request):
 def check_user(request):
     email=request.data.get("email")
     password=request.data.get("password")
+    print(f"{email}")
 
-    user=Users.objects.get(email=email)
+    user=None
+    try:
+        user=Users.objects.get(email=email)    
+    except Users.DoesNotExist:
+        return Response({"success":False,"message":"Username Wrong"})
 
-    if user:
-        username=user.username
+
+    print(user.password)
     
-    print(f"{user} and {type(user)}  ")
-
-    if(user.password==password):
-        return Response({"success":True,"username":username})
+    if check_password(password,user.password):
+        return Response({"success":True,"username":user.username})
     else:
-        return Response({"success":False})
+        return Response({"success":False,"message":"Password Wrong"})
+    
+
+@api_view(['POST'])
+def add_user(request):
+    email=request.data.get("email")
+    username=request.data.get("username")
+    password=request.data.get("password")
+    hashed_password=make_password(password)
+    #Check if this User Already Exists
+    user = None
+
+    try:
+        user=Users.objects.get(email=email)
+        if user:
+            return Response({"success":True,"message":"User Already Exists"})
+    except Exception:
+        print("Error While Fetching User")
+
+
+    #Else Save Now
+    serializer=UserSerializer(data={"email":email,"username":username,"password":hashed_password})
+
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        return Response({"success":False,"message":f"Seriaalizaer problem {serializer.errors}"})
+    print(f" {email} + {username} +  {password}")
+
+    return Response({"success":True})
+
+
+

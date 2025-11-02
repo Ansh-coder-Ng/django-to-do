@@ -12,4 +12,4 @@ class TaskSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=Users
-        field="__all__"
+        fields="__all__"
